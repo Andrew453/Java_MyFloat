@@ -11,6 +11,86 @@ public class MyFloat {
         this.mantissa=mantissa;
         this.exponent = exponent;
     }
+    public void sum(MyFloat b)
+    {
+        if(b.exponent>=this.exponent){
+            for(int i=0;i<b.exponent-this.exponent;i++)
+                this.mantissa*=10;
+            this.resultexponent=b.exponent;
+        }
+        else{
+            for(int j=0;j<this.exponent-b.exponent;j++)
+                b.mantissa*=10;
+            this.resultexponent=this.exponent;
+        }
+        this.resultmantissa=b.mantissa+this.mantissa;
+
+
+        long before =this.resultmantissa/(long)(Math.pow(10, this.resultexponent));
+        long after = this.resultmantissa%(long)(Math.pow(10, this.resultexponent));
+        long afternum=0;
+        long checkafter=after;
+        while(checkafter!=0)
+        {
+            checkafter/=10;
+            afternum++;
+        }
+        String afteranswer = Long.toString(after);
+        if(this.resultexponent!=afternum)
+        {
+            for(int i=0;i<(this.resultexponent-afternum);i++)
+                afteranswer = "0"+ afteranswer;
+        }
+        String beforeanswer = Long.toString(before);
+        String answer = beforeanswer + "," + afteranswer;
+        System.out.println(answer);
+
+
+    }
+
+
+    public void sub(MyFloat b)
+    {
+        if(b.exponent >= this.exponent){
+            for(int i = 0; i < b.exponent-this.exponent; i++)
+                this.mantissa *= 10;
+            this.resultexponent = b.exponent;
+        }
+        else{
+            for(int j = 0; j<this.exponent - b.exponent; j++)
+                b.mantissa *= 10;
+            this.resultexponent = this.exponent;
+        }
+        this.resultmantissa = this.mantissa - b.mantissa;
+        boolean minus = false;
+        if(this.resultmantissa < 0)
+        {
+            this.resultmantissa *= (-1);
+            minus = true;
+        }
+        long before = this.resultmantissa / (long)(Math.pow(10,this.resultexponent));
+        long after = this.resultmantissa % (long)(Math.pow(10,this.resultexponent));
+        long afterCheck = after;
+        long afternum = 0;
+        while (afterCheck != 0)
+        {
+            afternum++;
+            afterCheck /= 10;
+        }
+        String afteranswer = Long.toString(after);
+        if(resultexponent != afternum)
+        {
+            for(int i = 0;i < resultexponent - afternum; i++)
+            {
+                afteranswer = "0" + afteranswer;
+            }
+        }
+        String beforeanswer = Long.toString(before);
+        String answer = beforeanswer + "," + afteranswer;
+        if(minus)
+            answer = "-"+answer;
+        System.out.println(answer);
+    }
 
     
 }
